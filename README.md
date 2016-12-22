@@ -70,6 +70,6 @@ Make a web application that allows you write and delete short messages. When you
 
 
 ## Resources
-* [Github Repo](https://github.com/tiy-lv-java-2016-06/spring-microblog)
+* [Github Repo](https://github.com/tiy-lv-java-2016-11/spring-microblog)
 * [Spring MVC Guide](https://spring.io/guides/gs/serving-web-content/)
 * [Spring Initializr](https://start.spring.io/)
