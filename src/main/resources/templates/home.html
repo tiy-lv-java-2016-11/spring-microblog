@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{{#username}}
+<h1>Messages by {{username}}:</h1>
+<form action="/add-message" method="post">
+    <input type="content" placeholder="Enter your message" name="content" />
+    <button type="submit">Submit</button>
+</form>
+<form action="/delete-message" method="post">
+<ol>
+    {{#messages}}
+    <li>{{content}}<button type="submit" name="id" value="{{id}}">Delete</button> </li>
+    {{/messages}}
+</ol>
+</form>
+{{/username}}
+
+{{^username}}
+<form action="/login" method="post">
+    <input type="content" name="username" placeholder="Enter your name" />
+    <button type="submit">Login</button>
+</form>
+{{/username}}
+
+</body>
+</html>
