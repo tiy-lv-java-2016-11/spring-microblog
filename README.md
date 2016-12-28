@@ -38,10 +38,10 @@ Make a web application that allows you write and delete short messages. When you
   * If `username` doesn't exist, show the login form like the first screenshot
   * If `username` does exist, show the message submission form and message list like the second screenshot
 * Create a `Message` class next to your other classes
-  * It should have fields for `id` and `text`
+  * It should have fields for `id` and `content`
 * Create an `ArrayList<Message>` in your controller to store submitted messages
 * In your controller, create a route for `/add-message`
-  * It should take the message text as an argument
+  * It should take the message content as an argument
   * It should create a `Message` object and add it to the arraylist (for the id, do something like `messages.size() + 1`)
   * It should return a redirect to `/`
 * In `home.html`, add a button or link called "Delete" next to each message
