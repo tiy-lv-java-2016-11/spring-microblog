@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message Detail</title>
+</head>
+<body>
+<p>{{message.content}}</p>
+<p>Created by <a href="/">{{message.username}}</a> on {{message.createdOn}}</p>
+<form action="/update-message?id={{message.id}}" method="post">
+    <input type="text" placeholder="Enter new message here" name="content">
+    <button type="submit">Update</button>
+</form>
+<form id="fDelete" action="/delete-message?id={{message.id}}" method="post">
+    <button type="submit" id="delete">Delete</button>
+</form>
+<script src="/main.js"></script>
+
+</body>
+</html>

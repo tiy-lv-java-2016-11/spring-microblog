@@ -6,19 +6,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class MicroblogSpringControllers {
     public static final String SESSION_USERNAME = "username";
-    public static List<Message> messages = new ArrayList<>();
+    public static Map<String, Message> messages = new HashMap<>();
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model, HttpSession session){
         String username = (String)session.getAttribute(SESSION_USERNAME);
         model.addAttribute("username", username);
-        model.addAttribute("messages", messages);
+        model.addAttribute("messages", messages.values());
         return "home";
     }
 
@@ -28,17 +27,37 @@ public class MicroblogSpringControllers {
         return "redirect:/";
     }
 
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+    public String logout(HttpSession session){
+        session.invalidate();
+        return "redirect:/";
+    }
+
     @RequestMapping(path = "/add-message", method = RequestMethod.POST)
-    public String addMessage(String content){
-        Message m = new Message(messages.size()+1, content);
-        messages.add(m);
-        System.out.println(m.getContent());
+    public String addMessage(HttpSession session, String content){
+        String username = (String)session.getAttribute(SESSION_USERNAME);
+        Message m = new Message(content, username);
+        messages.put(m.getId(), m);
         return "redirect:/";
     }
 
     @RequestMapping(path = "/delete-message", method = RequestMethod.POST)
-    public String deleteMessage(int id){
-        messages.remove(id-1);
+    public String deleteMessage(String id){
+        messages.remove(id);
         return "redirect:/";
+    }
+
+    @RequestMapping(path = "/message", method = RequestMethod.GET)
+    public String messageDetail(Model model, String id){
+        Message message = messages.get(id);
+        model.addAttribute("message", message);
+        return "message";
+    }
+
+    @RequestMapping(path = "/update-message", method = RequestMethod.POST)
+    public String updateMessage(String id, String content){
+        Message message = messages.get(id);
+        message.setContent(content);
+        return "redirect:/message?id="+id;
     }
 }

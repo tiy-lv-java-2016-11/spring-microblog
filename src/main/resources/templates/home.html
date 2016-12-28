@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Microblogger</title>
 </head>
 <body>
 
 {{#username}}
-<h1>Messages by {{username}}:</h1>
 <form action="/add-message" method="post">
     <input type="content" placeholder="Enter your message" name="content" />
     <button type="submit">Submit</button>
 </form>
-<form action="/delete-message" method="post">
+<h1>Messages by {{username}}:</h1>
+<form id="fDelete" action="/delete-message" method="post">
 <ol>
     {{#messages}}
-    <li>{{content}}<button type="submit" name="id" value="{{id}}">Delete</button> </li>
+    <li><a href="/message?id={{id}}">{{content}} </a><button type="submit" id="delete" name="id" value="{{id}}">Delete</button> </li>
     {{/messages}}
 </ol>
+</form>
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
 </form>
 {{/username}}
 
@@ -27,6 +30,10 @@
     <button type="submit">Login</button>
 </form>
 {{/username}}
-
+<script
+src="https://code.jquery.com/jquery-3.1.1.min.js"
+integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+crossorigin="anonymous"></script>
+<script src="/main.js"></script>
 </body>
 </html>
